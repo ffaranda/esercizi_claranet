@@ -1,0 +1,36 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf610
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww25400\viewh16000\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ESERCIZI CLARANET SOLUZIONI\
+\
+1)\
+\
+#!/bin/bash\
+\
+# Controlla che sia stata passata una directory come argomento\
+if [ -z "$1" ]; then\
+    echo "Uso: $0 <directory>"\
+    exit 1\
+fi\
+\
+DIR="$1"\
+\
+# Trova tutti i file eseguibili nella directory specificata\
+find "$DIR" -type f -executable | while read file; do\
+    # Legge la prima riga del file (shebang)\
+    shebang=$(head -n 1 "$file" | grep -oE '^#!\\S+')\
+    \
+    # Se esiste uno shebang valido, lo stampa\
+    if [[ -n "$shebang" ]]; then\
+        echo "$shebang"\
+    fi\
+done | sort | uniq -c | sort -nr\
+\
+\
+2)\
+\
+0 0 * * 0 tar -czf /tmp/home_user_backup_$(date +\\%Y\\%m\\%d).tar.gz -C /home user && scp /tmp/home_user_backup_*.tar.gz user@192.168.1.100:/backup/}

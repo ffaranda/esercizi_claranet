@@ -11,7 +11,7 @@
 \
 #!/bin/bash\
 \
-# Controlla che sia stata passata una directory come argomento\
+# Controllo che sia stata passata una directory come argomento\
 if [ -z "$1" ]; then\
     echo "Uso: $0 <directory>"\
     exit 1\
@@ -19,12 +19,12 @@ fi\
 \
 DIR="$1"\
 \
-# Trova tutti i file eseguibili nella directory specificata\
+# Trovo tutti i file eseguibili nella directory specificata\
 find "$DIR" -type f -executable | while read file; do\
     # Legge la prima riga del file (shebang)\
     shebang=$(head -n 1 "$file" | grep -oE '^#!\\S+')\
     \
-    # Se esiste uno shebang valido, lo stampa\
+    # Se esiste uno shebang valido, lo stampo\
     if [[ -n "$shebang" ]]; then\
         echo "$shebang"\
     fi\
